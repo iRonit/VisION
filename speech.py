@@ -1,8 +1,29 @@
 #!/usr/bin/python
-import pyttsx
 
-def speak(text):
-	speech_engine = pyttsx.init('espeak')         # see http://pyttsx.readthedocs.org/en/latest/engine.html#pyttsx.init
-	speech_engine.setProperty('rate', 100)        #print speech_engine.getProperty('voices')
-  	speech_engine.say(text)
-	speech_engine.runAndWait()
+class Speech:
+	def __init__(self, gender, language):
+		self.__gender=gender
+		self.__language=language 
+	
+	def set_gender(self, gender):
+		self.__gender=gender
+	
+	def get_gender(self):
+		return self.__gender
+		
+def speak(self, text_file):
+	contents = ''
+	with open(text_file, 'r') as handle:
+		for line in handle.readlines():
+			contents += line.strip() + ' '
+	contents=contents.replace("\xe2\x80\x98", "")
+	contents=contents.replace("'", '')
+	contents=contents.replace("\\", '')
+	print repr(contents)
+	os.remove(text_file)
+	voice=""
+	if gender.lower()=="male":
+		voice = ""     #Please add the appropriate command option
+	else:
+		voice = ""	#same here for female
+	os.system('espeak -s 100 --gender=' + self.__gender + ' --language=' + self.__language + '--stdout ' + repr(contents) + ' | aplay')
